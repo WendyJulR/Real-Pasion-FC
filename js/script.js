@@ -1932,37 +1932,53 @@
 
 
 
-function showPopup() {
-	document.getElementById('overlay').style.display = 'block';
-	document.getElementById('popup').style.display = 'block';
-	startCountdown();
+function cerrarAnuncio() {
+    document.getElementById('anuncioFondo').style.display = 'none';
 }
 
-function closePopup() {
-	document.getElementById('overlay').style.display = 'none';
-	document.getElementById('popup').style.display = 'none';
-	clearInterval(countdownInterval);
+window.onload = function() {
+    setTimeout(() => {
+        document.getElementById('anuncioFondo').style.display = 'flex';
+    }, 500); // Ajusta el tiempo para mostrar el anuncio después de cargar la página
 }
 
-let countdownInterval;
-function startCountdown() {
-	const championshipDate = new Date(Date.now() + 86400000); // 1 día a partir de ahora
-	countdownInterval = setInterval(() => {
-		const now = new Date().getTime();
-		const distance = championshipDate - now;
 
-		const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-		const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-		document.getElementById('countdown').innerText = 
-			`${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
-		if (distance < 0) {
-			clearInterval(countdownInterval);
-			document.getElementById('countdown').innerText = "¡El campeonato ha comenzado!";
-		}
-	}, 1000);
-}
 
-window.onload = showPopup;
+var modal1 = document.getElementById("anuncioEmergente1");
+  var span1 = modal1.getElementsByClassName("cerrar")[0];
+
+  document.getElementById("abrirAnuncio1").onclick = function(event) {
+    event.preventDefault();
+    modal1.style.display = "block";
+  }
+
+  span1.onclick = function() {
+    modal1.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal1) {
+      modal1.style.display = "none";
+    }
+  }
+
+  // Funciones para mostrar el modal del anuncio 2
+  var modal2 = document.getElementById("anuncioEmergente2");
+  var span2 = modal2.getElementsByClassName("cerrar")[0];
+
+  document.getElementById("abrirAnuncio2").onclick = function(event) {
+    event.preventDefault();
+    modal2.style.display = "block";
+  }
+
+  span2.onclick = function() {
+    modal2.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal2) {
+      modal2.style.display = "none";
+    }
+  }
